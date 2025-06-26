@@ -26,5 +26,7 @@ jobs:
         pip install pytest
 
     - name: Run tests with pytest
+      env:
+        SECRET_KEY: "test_secret"
       run: |
         PYTHONPATH=./ pytest -v
