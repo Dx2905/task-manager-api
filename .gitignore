@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.log
+
+# Environments
+env/
+venv/
+ENV/
+.venv/
+.Python
+
+# IDE
+.vscode/
+.idea/
+
+# FastAPI / Pydantic
+*.db
+test.db
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Docker
+*.pid
+*.tar
+*.sock
+
+# Secrets
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# Jupyter Notebooks (if any)
+.ipynb_checkpoints/
+
+# Git
+*.orig
