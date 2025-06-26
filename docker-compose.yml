@@ -29,6 +29,12 @@ services:
       SECRET_KEY: your_super_secret_key
       ALGORITHM: HS256
       ACCESS_TOKEN_EXPIRE_MINUTES: 30
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
 
 volumes:
   postgres_data:

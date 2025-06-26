@@ -1,4 +1,6 @@
 
+---
+
 ```markdown
 # 🗂️ Task Manager API Platform
 
@@ -24,14 +26,20 @@ A Trello-style Task Manager backend built with **FastAPI**, **PostgreSQL**, and 
   - Task CRUD
   - User management
 - **No Docker dependency** during test runs
+- **CI pipeline** via GitHub Actions
+
+### 📊 Monitoring & Observability
+- `/metrics` endpoint with **Prometheus** instrumentation
+- Preconfigured **Prometheus dashboard** via Docker
+- Logging support (can be extended to file/rotation)
 
 ### 🐳 DevOps Ready
 - `Dockerfile` for FastAPI app
 - `docker-compose.yml` with:
   - PostgreSQL DB
-  - Redis (planned)
+  - Prometheus
 - Built-in `.env` support for config
-- Ready for deployment via `uvicorn`, `gunicorn`, or CI pipelines
+- Production-ready with `uvicorn`, `gunicorn`, or CI pipelines
 
 ---
 
@@ -67,6 +75,8 @@ task-manager-api/
 │   ├── utils/              # Helper functions (authz, hashing)
 │   └── main.py             # Entry point
 ├── tests/                  # pytest test suite
+├── .github/workflows/      # GitHub Actions CI pipeline
+├── prometheus.yml          # Prometheus configuration
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt
@@ -101,6 +111,12 @@ docker-compose up --build
 
 # Access the API
 http://localhost:8000/docs
+
+# Prometheus Monitoring
+http://localhost:9090
+
+# Metrics Endpoint
+http://localhost:8000/metrics
 ```
 
 Make sure your `.env` contains:
@@ -125,16 +141,19 @@ RBAC is enforced using dependency-based authorization (`authz.is_admin_or_self()
 
 ---
 
-## 📈 Upcoming Enhancements (Planned)
+## 📈 Observability & Monitoring
 
-| Feature        | Status    |
-|----------------|-----------|
-| Redis Caching  | ⏳ Planned |
-| Prometheus     | ⏳ Planned |
-| CI via GitHub Actions | ⏳ Planned |
-| Logging (file + rotating) | ⏳ Planned |
-| Static file serving / Frontend CORS config | ✅ Basic CORS enabled |
-| Role management API | ⏳ Optional |
+- ✅ `/metrics` endpoint for FastAPI performance
+- ✅ Prometheus dashboard at `localhost:9090`
+- ⚙️ Logging enabled (can be extended with file/rotation)
+
+---
+
+## 🛠️ GitHub Actions (CI)
+
+- ✅ Automated test pipeline on `push` and `pull_request` to `main`
+- Uses Python 3.12 and installs dependencies from `requirements.txt`
+- Runs all `pytest` tests with `PYTHONPATH=./` setup
 
 ---
 
@@ -165,3 +184,6 @@ MIT License.
 
 ---
 ```
+
+---
+

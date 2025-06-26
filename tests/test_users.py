@@ -86,3 +86,9 @@ def test_admin_can_delete_user(client, admin_auth_header):
     # Confirm deletion
     get_res = client.get(f"/users/{user_id}", headers=admin_auth_header)
     assert get_res.status_code == 404
+
+def test_admin_can_view_all_users(client, admin_auth_header):
+    res = client.get("/users/", headers=admin_auth_header)
+    assert res.status_code == 200
+    assert isinstance(res.json(), list)
+    assert any(user["email"] == "admin@example.com" for user in res.json())

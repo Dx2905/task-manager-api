@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from app.api.routes import auth, health, tasks
 from app.api.routes import users
+from prometheus_fastapi_instrumentator import Instrumentator
+from app.config import settings
 
 app = FastAPI(
     title="Task Manager API",
@@ -8,7 +10,7 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc"
 )
-
+Instrumentator().instrument(app).expose(app)
 
 # Register routers
 app.include_router(health.router)

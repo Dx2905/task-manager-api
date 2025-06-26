@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from fastapi import Depends
+from typing import List
+
 
 from app.schemas.user import UserOut, UserUpdate
 from app.models.user import User
@@ -48,3 +50,13 @@ def delete_user(user_id: int, db: Session = Depends(get_db), current_user: User 
 
     db.delete(user)
     db.commit()
+
+@router.get("/", response_model=List[UserOut])
+def get_all_users(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    if current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Only admins can access all users")
+
+    return db.query(User).all()
