@@ -1,7 +1,4 @@
 
----
-
-```markdown
 # 🗂️ Task Manager API Platform
 
 A Trello-style Task Manager backend built with **FastAPI**, **PostgreSQL**, and **Docker**. It supports **user authentication**, **JWT-based security**, **role-based access (admin/member)**, and full **task CRUD operations**. Designed with scalability and production-readiness in mind.
